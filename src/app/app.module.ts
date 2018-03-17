@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 
 
 import { AppComponent } from './app.component';
 import { FotoModule } from './components/foto/foto.module';
+import { CabecalhoModule } from './components/cabecalho/cabecalho.module';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { FotoModule } from './components/foto/foto.module';
   ],
   imports: [
     BrowserModule,
-    FotoModule
+    FotoModule,
+    CabecalhoModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

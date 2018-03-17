@@ -1,14 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div>
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="text-center display-4">
-        {{ title }}!
-      </h1>
-    </div>
-
-  </div>
-  <foto url="/assets/img/carro01.jpg" titulo="Carrão"></foto>
-  <foto url="/assets/img/carro02.jpg" titulo="Carro Velho"></foto>
-
+  <cabecalho [title]="title"></cabecalho>
+  <foto *ngFor="let foto of fotos" url="{{foto.url}}" [titulo]="foto.descricao"></foto>
 </div>
