@@ -14,10 +14,10 @@ export class AppComponent {
   ];
 
 
-  constructor(@Inject(HttpClient) httpClient) {
+  constructor(httpClient: HttpClient) {
     console.log(httpClient);
     httpClient.get('http://localhost:3000/v1/fotos')
-              .subscribe((dados) => {
+              .subscribe((dados: Object[]) => {
                 this.fotos = dados;
               });
   }
