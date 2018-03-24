@@ -1,10 +1,1 @@
-<div>
-  <cabecalho [title]="title"></cabecalho>
-  <div class="container">
-    <div class="row">
-      <card class="col-md-2" *ngFor="let foto of fotos"  [titulo]="foto.titulo" [descricao]="foto.descricao">
-        <foto url="{{foto.url}}" [titulo]="foto.descricao"></foto>
-      </card>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>
