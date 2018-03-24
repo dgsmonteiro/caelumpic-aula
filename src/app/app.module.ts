@@ -10,13 +10,17 @@ import { CardModule } from './components/card/card.module';
 import { GaleriaComponent } from './pages/galeria/galeria.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 
-import { roteamento } from './routing'
+import { roteamento } from './routing';
+import { Page404Component } from './pages/page404/page404.component';
+
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
     AppComponent,
     GaleriaComponent,
     CadastroComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,8 @@ import { roteamento } from './routing'
     CabecalhoModule,
     HttpClientModule,
     CardModule,
-    roteamento
+    roteamento,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

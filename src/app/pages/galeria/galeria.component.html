@@ -1,0 +1,69 @@
+<div>
+
+
+  <nav id="navbar-example2" class="navbar navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="['/']">Caelumpic</a>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/']">Fotos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/cadastro']">Cadastro</a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#one">one</a>
+          <a class="dropdown-item" href="#two">two</a>
+          <div role="separator" class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#three">three</a>
+        </div>
+      </li> -->
+    </ul>
+    <div class="navbar" id="navbarColor02">
+      <form class="form-inline">
+        <input #inputDaBusca (input)="0" class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pesquisar</button>
+      </form>
+    </div>
+  </nav>
+<!-- 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Portfolio</a>
+      
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']">Fotos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/cadastro']">Cadastro</a>
+          </li>
+        </ul>
+      
+        <div class="navbar" id="navbarColor02">
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav> -->
+
+  
+    <cabecalho [title]="title | uppercase"></cabecalho>
+
+
+
+
+    <div class="container">
+      <div class="row">
+        <card class="col-md-4 col-sm-4 col-xs-12" 
+        *ngFor="let foto of fotos | filtraPorTitulo: inputDaBusca.value"  
+        [titulo]="foto.titulo" 
+        [descricao]="foto.descricao">
+          <foto url="{{foto.url}}" 
+          [titulo]="foto.descricao"></foto>
+        </card>
+      </div>
+    </div>
+  </div>
+  
