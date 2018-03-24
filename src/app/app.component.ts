@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient,HttpResponse } from '@angular/common/http'
+import { FotoComponent } from './components/foto/foto.component';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +9,16 @@ import { HttpClient } from '@angular/common/http'
 })
 export class AppComponent {
   title: string = 'Galeria de Fotos';
-  fotos: Array<Object> = [
-    {url: '/assets/img/carro01.jpg', descricao: 'Carrão'},
-    {url: '/assets/img/carro02.jpg', descricao: 'Carro Velho'}
-  ];
+  fotos: Array<FotoComponent> = [ ];
 
 
   constructor(httpClient: HttpClient) {
     console.log(httpClient);
-    httpClient.get('http://localhost:3000/v1/fotos')
-              .subscribe((dados: Object[]) => {
-                this.fotos = dados;
+    //Fazer o AJAX - Faz chamada pra qualquer dispositivo
+    httpClient.get('http://localhost:3000/v1/fotos', { observe: 'response'})
+              .subscribe((dados: HttpResponse<FotoComponent[]>) => {
+                console.log('Dados: ', dados);
+                this.fotos = dados.body;
               });
   }
 }

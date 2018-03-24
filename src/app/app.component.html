@@ -1,4 +1,10 @@
 <div>
   <cabecalho [title]="title"></cabecalho>
-  <foto *ngFor="let foto of fotos" url="{{foto.url}}" [titulo]="foto.descricao"></foto>
+  <div class="container">
+    <div class="row">
+      <card class="col-md-2" *ngFor="let foto of fotos"  [titulo]="foto.titulo" [descricao]="foto.descricao">
+        <foto url="{{foto.url}}" [titulo]="foto.descricao"></foto>
+      </card>
+    </div>
+  </div>
 </div>
