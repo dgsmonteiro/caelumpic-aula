@@ -20,26 +20,31 @@
 
 
 <div class="container">
-  <form (submit)="cadastraFoto($event)">
+  <form (submit)="cadastraFoto($event)" #formCadastro="ngForm">
     <div class="form-group">
       <label for="url">URL</label>
       <input type="text" 
              name="url" 
+             #campoUrl="ngModel"
+             required
              class="form-control" 
              id="url" 
              placeholder="URL"
-             value={{foto.url}}
-             (input)="foto.url = $event.target.value">
+             [(ngModel)]=foto.url>
+             <span class="text-danger font-italic" *ngIf="campoUrl.invalid && !campoUrl.pristine">Preencha o Campo</span>
     </div>
     <div class="form-group">
       <label for="titulo">Titulo</label>
       <input type="text" 
-             name="titulo" 
+             name="titulo"  
+             #campoTitulo="ngModel"
+             required
              class="form-control" 
              id="titulo" 
              placeholder="Titulo"
-             value={{foto.titulo}}
-             (input)="foto.titulo = $event.target.value">
+             [(ngModel)]=foto.titulo>
+             <span class="text-danger font-italic" *ngIf="campoTitulo.invalid && !campoTitulo.pristine">Preencha o Campo</span>
+
     </div>
     <div class="form-group">
       <label for="descricao">Descrição</label>
@@ -60,8 +65,9 @@
       </card>
         
     </div>
-    <div class="row justify-content-end">
-      <button type="submit" class="btn btn-outline-success">
+
+    <div class="row justify-content-end mb-5">
+      <button type="submit" class="btn btn-outline-success" [disabled]="formCadastro.form.invalid">
         {{textoBotao}}
       </button>
       <a class="ml-2 btn btn-outline-secondary" [routerLink]="['/']">Voltar</a>
