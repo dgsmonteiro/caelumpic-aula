@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient,HttpResponse } from '@angular/common/http'
+import { HttpResponse } from '@angular/common/http'
 import { FotoComponent } from '../../components/foto/foto.component';
 import { FotoService } from '../../services/Foto.service'
 
@@ -16,19 +16,26 @@ export class GaleriaComponent implements OnInit {
   fotos: Array<FotoComponent> = [ ];
 
 
-  constructor(private httpClient: HttpClient, private fotoService : FotoService) {
+  constructor(private fotoService : FotoService) {
    
   }
 
   ngOnInit() {
 
-    this.fotoService.lista();
+    this.fotoService.lista()
     //Fazer o AJAX - Faz chamada pra qualquer dispositivo
-    this.httpClient.get('http://localhost:3000/v1/fotos', { observe: 'response'})
               .subscribe((dados: HttpResponse<FotoComponent[]>) => {
-                console.log('Dados: ', dados);
                 this.fotos = dados.body;
               });
+  }
+
+  remover(idFoto) {
+    this.fotoService.remover(idFoto)
+                    .subscribe((foto) => {
+                      const fotosAtualizadas = this.fotos.filter((foto) => foto._id !== idFoto)
+                      this.fotos = fotosAtualizadas;
+                    })
+    
   }
   
 }

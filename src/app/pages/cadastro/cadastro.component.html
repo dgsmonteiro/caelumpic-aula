@@ -78,6 +78,16 @@
                 [(ngModel)]="foto.descricao">
       </textarea>
     </div>
+    <div class="row">
+      <h1 class="col-12">Preview</h1>
+      <card class="col-6" 
+              [titulo]="foto.titulo" 
+              [descricao]="foto.descricao">
+        <foto url="{{foto.url}}" 
+              [titulo]="foto.descricao"></foto>
+      </card>
+        
+    </div>
     <button type="submit" class="btn btn-success">
       Salvar
     </button>

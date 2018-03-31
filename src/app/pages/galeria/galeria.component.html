@@ -60,8 +60,14 @@
         *ngFor="let foto of fotos | filtraPorTitulo: inputDaBusca.value"  
         [titulo]="foto.titulo" 
         [descricao]="foto.descricao">
-          <foto url="{{foto.url}}" 
-          [titulo]="foto.descricao"></foto>
+        <button type="button" class="btn btn-outline-danger close" (click)="remover(foto._id)" aria-label="Close"> 
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <a [routerLink]="['/cadastro', foto._id]">
+            <foto url="{{foto.url}}" 
+                  [titulo]="foto.descricao"></foto>
+          </a>
+          
         </card>
       </div>
     </div>

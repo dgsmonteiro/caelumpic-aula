@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FotoComponent } from '../../components/foto/foto.component';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FotoService } from '../../services/Foto.service';
+import { ActivatedRoute } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,8 +14,16 @@ export class CadastroComponent implements OnInit {
   title: string = 'Cadastro de Foto';
   foto: FotoComponent;
 
-  constructor(private httpClient : HttpClient) {
+  constructor(private fotoService : FotoService, private rota : ActivatedRoute) {
     this.foto = new FotoComponent;
+    rota.params.subscribe((parametros) => {
+      const idFoto = parametros._id;
+      if(idFoto) {
+        this.fotoService.consultar(idFoto)
+                        .subscribe((resposta : HttpResponse<FotoComponent>) => this.foto = resposta.body);
+      }
+    })
+    
    }
 
   ngOnInit() {
@@ -23,16 +33,17 @@ export class CadastroComponent implements OnInit {
     event.preventDefault();
     console.log(this.foto);
 
-    const cabecalho = new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
 
-    this.httpClient.post('http://localhost:3000/v1/fotos', 
-                          JSON.stringify(this.foto), 
-                          {headers: cabecalho})
+    this.fotoService.cadastrar(this.foto)
                     .subscribe(response => {
+
+                      //Para Limpar o Form
                       this.foto = new FotoComponent;
+
                     })
+  }
+  editar (idFoto) {
+    
   }
 
 }

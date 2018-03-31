@@ -1,8 +1,7 @@
 <div class="card">
-  <ng-content></ng-content>
+  <h5 class="card-header">{{ titulo }}</h5>
   <div class="card-body">
-    <h5 class="card-title">{{ titulo }}</h5>
-    <p class="card-text">{{ descricao }}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <ng-content></ng-content>
+    <p class="card-title">{{ descricao }}</p>
   </div>
 </div>
