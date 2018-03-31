@@ -24,6 +24,15 @@ export class FotoService {
         JSON.stringify(foto), 
         {headers: cabecalho});
     }
+    alterar(foto : FotoComponent) : Observable<Object> {
+        const cabecalho = new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+
+        return this.httpClient.put(`${this.URL}/${foto._id}`, 
+        JSON.stringify(foto), 
+        {headers: cabecalho});
+    }
     remover (idFoto:string) : Observable<Object> {
         return this.httpClient.delete(`${this.URL}/${idFoto}`,{observe: 'response'})
     }

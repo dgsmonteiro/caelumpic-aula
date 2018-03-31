@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FotoComponent } from '../../components/foto/foto.component';
 import { FotoService } from '../../services/Foto.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({
@@ -12,15 +12,20 @@ import { HttpResponse } from '@angular/common/http';
 export class CadastroComponent implements OnInit {
 
   title: string = 'Cadastro de Foto';
+  subtitle: string = 'Subtitulo da página de cadastro de fotos';
   foto: FotoComponent;
+  textoBotao: string;
 
-  constructor(private fotoService : FotoService, private rota : ActivatedRoute) {
+  constructor(private fotoService : FotoService, private rota : ActivatedRoute, private router : Router) {
     this.foto = new FotoComponent;
     rota.params.subscribe((parametros) => {
       const idFoto = parametros._id;
       if(idFoto) {
         this.fotoService.consultar(idFoto)
                         .subscribe((resposta : HttpResponse<FotoComponent>) => this.foto = resposta.body);
+        this.textoBotao = 'Editar';
+      } else {
+        this.textoBotao = 'Salvar';
       }
     })
     
@@ -31,18 +36,19 @@ export class CadastroComponent implements OnInit {
 
   cadastraFoto(event: Event) {
     event.preventDefault();
-    console.log(this.foto);
+    if (!this.foto._id) {
+      this.fotoService.cadastrar(this.foto)
+      .subscribe((response) => {
+        //Para Limpar o Form
+        this.foto = new FotoComponent;
 
-
-    this.fotoService.cadastrar(this.foto)
-                    .subscribe(response => {
-
-                      //Para Limpar o Form
-                      this.foto = new FotoComponent;
-
-                    })
-  }
-  editar (idFoto) {
+      })
+    } else {
+      this.fotoService.alterar(this.foto)
+                      .subscribe((response) => {
+                        this.router.navigate(['/'])
+                      })
+    }
     
   }
 
