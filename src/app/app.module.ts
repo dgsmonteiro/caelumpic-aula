@@ -13,6 +13,8 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { roteamento } from './routing';
 import { Page404Component } from './pages/page404/page404.component';
 
+import { FotoService } from './services/Foto.service'
+
 import { FormsModule } from '@angular/forms'
 
 @NgModule({
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms'
     roteamento,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    FotoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
