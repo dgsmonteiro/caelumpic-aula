@@ -15,7 +15,7 @@ import { Page404Component } from './pages/page404/page404.component';
 
 import { FotoService } from './services/Foto.service'
 
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { FormsModule } from '@angular/forms'
     HttpClientModule,
     CardModule,
     roteamento,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     FotoService

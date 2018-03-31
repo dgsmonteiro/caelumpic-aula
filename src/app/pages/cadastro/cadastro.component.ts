@@ -3,6 +3,7 @@ import { FotoComponent } from '../../components/foto/foto.component';
 import { FotoService } from '../../services/Foto.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { FormGroup, FormBuilder, Form, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -15,9 +16,15 @@ export class CadastroComponent implements OnInit {
   subtitle: string = 'Subtitulo da página de cadastro de fotos';
   foto: FotoComponent;
   textoBotao: string;
+  formCadastro : FormGroup
 
-  constructor(private fotoService : FotoService, private rota : ActivatedRoute, private router : Router) {
+  constructor(private formBuilder: FormBuilder, private fotoService : FotoService, private rota : ActivatedRoute, private router : Router) {
     this.foto = new FotoComponent;
+    this.formCadastro = formBuilder.group({
+      url: ['', Validators.required],
+      titulo: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      descricao: []
+    });
     rota.params.subscribe((parametros) => {
       const idFoto = parametros._id;
       if(idFoto) {
@@ -27,9 +34,10 @@ export class CadastroComponent implements OnInit {
       } else {
         this.textoBotao = 'Salvar';
       }
-    })
-    
+    });
    }
+
+   
 
   ngOnInit() {
   }
